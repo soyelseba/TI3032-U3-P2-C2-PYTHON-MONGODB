@@ -31,6 +31,7 @@ def insercion_inicial_coleccion_clientes() -> None:
     respuesta = coleccion_clientes.insert_many(
         [
             {
+                "_id": 1,
                 "nombre": "Laura Martínez",
                 "email": "laura.martinez@gmail.com",
                 "fecha_registro": "2026-01-15T10:30:00Z",
@@ -38,6 +39,7 @@ def insercion_inicial_coleccion_clientes() -> None:
                 "telefono": "+56 9 8123 4567"
             },
             {
+                "_id": 2,
                 "nombre": "Carlos Rojas",
                 "email": "carlos.rojas@hotmail.com",
                 "fecha_registro": "2025-09-22T14:10:00Z",
@@ -45,6 +47,7 @@ def insercion_inicial_coleccion_clientes() -> None:
                 "telefono": "+56 9 7234 5678"
             },
             {
+                "_id": 3,
                 "nombre": "Fernanda Silva",
                 "email": "fernanda.silva@gmail.com",
                 "fecha_registro": "2024-03-05T09:45:00Z",
@@ -52,6 +55,7 @@ def insercion_inicial_coleccion_clientes() -> None:
                 "telefono": "+56 9 6345 6789"
             },
             {
+                "_id": 4,
                 "nombre": "Javier Torres",
                 "email": "javier.torres@outlook.com",
                 "fecha_registro": "2026-04-18T16:20:00Z",
@@ -59,6 +63,7 @@ def insercion_inicial_coleccion_clientes() -> None:
                 "telefono": "+56 9 5456 7890"
             },
             {
+                "_id": 5,
                 "nombre": "Camila Soto",
                 "email": "camila.soto@gmail.com",
                 "fecha_registro": "2025-12-02T11:00:00Z",
@@ -66,6 +71,7 @@ def insercion_inicial_coleccion_clientes() -> None:
                 "telefono": "+56 9 4567 8901"
             },
             {
+                "_id": 6,
                 "nombre": "Matías Herrera",
                 "email": "matias.herrera@yahoo.com",
                 "fecha_registro": "2023-07-11T13:25:00Z",
@@ -73,6 +79,7 @@ def insercion_inicial_coleccion_clientes() -> None:
                 "telefono": "+56 9 3678 9012"
             },
             {
+                "_id": 7,
                 "nombre": "Valentina Fuentes",
                 "email": "valentina.fuentes@gmail.com",
                 "fecha_registro": "2026-02-28T08:15:00Z",
@@ -80,6 +87,7 @@ def insercion_inicial_coleccion_clientes() -> None:
                 "telefono": "+56 9 2789 0123"
             },
             {
+                "_id": 8,
                 "nombre": "Diego Morales",
                 "email": "diego.morales@empresa.cl",
                 "fecha_registro": "2022-10-09T17:40:00Z",
@@ -87,6 +95,7 @@ def insercion_inicial_coleccion_clientes() -> None:
                 "telefono": "+56 9 1890 1234"
             },
             {
+                "_id": 9,
                 "nombre": "Paula Contreras",
                 "email": "paula.contreras@gmail.com",
                 "fecha_registro": "2025-06-20T12:05:00Z",
@@ -94,6 +103,7 @@ def insercion_inicial_coleccion_clientes() -> None:
                 "telefono": "+56 9 9001 2345"
             },
             {
+                "_id": 10,
                 "nombre": "Andrés Vega",
                 "email": "andres.vega@icloud.com",
                 "fecha_registro": "2024-11-30T15:55:00Z",
@@ -324,9 +334,13 @@ def insercion_inicial_coleccion_pedidos() -> None:
 
     print(respuesta)
 
+# Limpiar/Borrar las colecciones
+coleccion_clientes.drop()
+coleccion_pedidos.drop()
+
 # Ejecución de insercion inicial
-# insercion_inicial_coleccion_clientes()
-# insercion_inicial_coleccion_pedidos()
+insercion_inicial_coleccion_clientes()
+insercion_inicial_coleccion_pedidos()
 
 documentos_clientes = coleccion_clientes.find({},{"_id": 1})
 documentos_pedidos = coleccion_pedidos.find({},{"_id": 1})
