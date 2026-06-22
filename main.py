@@ -262,5 +262,52 @@ def clientes_en_el_ultimo_año() -> None:
     for documento in documentos_clientes:
         print(documento)
 
+def clientes_con_pedidos_500_ultimo_año() -> None:
+    pipeline = [
+        {
+            "$match": {
+                "monto_total": { "$gt": 500 },
+                "fecha_pedido": { "$gte": "2025-06-22T00:00:00Z" }
+            }
+        },
+        {
+            "$lookup": {
+                "from": "clientes",
+                "localField": "cliente_id",
+                "foreignField": "_id",
+                "as": "cliente"
+            }
+        },
+        {
+            "$unwind": "$cliente"
+        },
+        {
+            "$project": {
+                "_id": "$cliente._id",
+                "nombre": "$cliente.nombre",
+                "email": "$cliente.email",
+                "fecha_registro": "$cliente.fecha_registro",
+                "direccion": "$cliente.direccion",
+                "telefono": "$cliente.telefono",
+            }
+        },
+        {
+            "$sort": { "_id": 1 }
+        }
+    ]
 
-clientes_en_el_ultimo_año()
+    consulta = coleccion_pedidos.aggregate( pipeline )
+
+    for documento in consulta:
+        print(
+            f"""
+            _id: {documento["_id"]}
+            nombre: {documento["nombre"]}
+            email: {documento["email"]}
+            fecha_registro: {documento["fecha_registro"]}
+            direccion: {documento["direccion"]}
+            telefono: {documento["telefono"]}
+            """
+        )   
+
+clientes_con_pedidos_500_ultimo_año()
